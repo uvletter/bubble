@@ -29,10 +29,10 @@ class Task(object):
 		self.id = id
 		self.__dict__.update(kw)
 
-		if not 'retry' in self.__dict__:
+		if 'retry' not in self.__dict__:
 			self.retry = False
 
-		if not 'topic' in self.__dict__:
+		if 'topic' not in self.__dict__:
 			self.topic = '_default'
 
 class Ant(object):
@@ -74,7 +74,7 @@ class Worker(Ant):
 			logger.exception('PID {0} Error: {1}'.format(os.getpid(), error))
 
 	def _handle(self, task):
-		if not task.topic in self.crawl_funcs:
+		if task.topic not in self.crawl_funcs:
 			raise Exception('Cannot find the crawl function of topic {0}, task id {1}'.format(task.topic, task.id))
 
 		try:
@@ -94,7 +94,7 @@ class Worker(Ant):
 		:param topic: the topic of the crawl function
 		'''
 		def decorator(f):
-			if not topic in self.crawl_funcs:
+			if topic not in self.crawl_funcs:
 				self.crawl_funcs[topic] = []
 
 			self.crawl_funcs[topic].append(f)
@@ -107,7 +107,7 @@ class Worker(Ant):
 		'''
 		def decorator(f):
 			for target in args:
-				if not target.__name__ in self.parser_funcs:
+				if target.__name__ not in self.parser_funcs:
 					self.parser_funcs[target.__name__] = []
 
 				self.parser_funcs[target.__name__].append(f)

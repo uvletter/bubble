@@ -25,8 +25,11 @@ def traverse(sets, nodes, edges, id, level):
 	if id in sets:
 		return
 
-	sets[id] = len(sets)
 	root = mongo.find_one({'_id': id})
+	if root is None:
+		abort(404)
+	
+	sets[id] = len(sets)	
 	root.pop('updatetime')
 	root['size'] = 10
 	root['color'] = COLORS[random.randint(0, len(COLORS)-1)]
