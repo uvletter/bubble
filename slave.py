@@ -89,7 +89,7 @@ def topic_parser_appender(text):
 	topic = _parse(text)
 	g['mongo'].update_one(
 		filter={'_id': topic.id},
-		update={'$pushAll': {'children': topic.children}, '$set': {'updatetime': datetime.datetime.now()}}
+		update={'$push': {'children': {'$each': topic.children}}, '$set': {'updatetime': datetime.datetime.now()}}
 	)
 
 def parse_cookies(text):
