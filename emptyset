@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+class EmptySet():
+    """A empty set, which means function exist() always return False"""
+    def add(self, id):
+        pass
+
+    def remove(self, id):
+        pass
+
+    def clear(self):
+        pass
+
+    def isnull(self):
+        return True
+
+    def exist(self, id):
+        return False
+
+    def dump(self, filename='dump.bin'):
+        pass
+
+
+    def recorve(self, filename='dump.bin'):
+        pass
+
+def test():
+    emptyset = EmptySet()
+    emptyset.add(1)
+    emptyset.remove(1)
+    emptyset.clear()
+    assert emptyset.isnull()
+    emptyset.add(0)
+    assert not emptyset.exist(0)
+    emptyset.dump()
+    emptyset.recorve()
+    print('Pass the test')
+
+if __name__ == '__main__':
+    test()
